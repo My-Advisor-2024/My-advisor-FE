@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/DiagnosisForm.css";
 
 const DiagnosisForm = () => {
   const [formData, setFormData] = useState({
@@ -17,13 +18,20 @@ const DiagnosisForm = () => {
     setFormData({ ...formData, photo: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = new FormData();
+    data.append("gender", formData.gender);
+    data.append("age", formData.age);
+    data.append("location", formData.location);
+    data.append("photo", formData.photo);
 
-    // 임시 데이터로 결과 저장
-    const fakePrediction = "Skin Condition A"; // 백엔드 연결 전에 임시 데이터 사용
+    // 서버 요청 시뮬레이션 (임시)
+    console.log("Submitting form:", data);
+
+    // 세션 스토리지에 데이터 저장 (백엔드 연결 시 대체 가능)
     sessionStorage.setItem("uploadedImage", URL.createObjectURL(formData.photo));
-    sessionStorage.setItem("prediction", fakePrediction);
+    sessionStorage.setItem("prediction", "AI Predicted Skin Condition");
 
     // 결과 페이지로 이동
     window.location.href = "/result";
@@ -31,54 +39,41 @@ const DiagnosisForm = () => {
 
   return (
     <form id="diagnosisForm" onSubmit={handleSubmit}>
-      <h2>Diagnosis Form</h2>
-      <label>
-        Gender
+      <h1>Diagnosis Form</h1>
+      <div>
+        <label>Gender</label>
         <input
           type="text"
           name="gender"
-          id="gender"
           value={formData.gender}
           onChange={handleChange}
           required
         />
-      </label>
-      <br />
-      <label>
-        Age
+      </div>
+      <div>
+        <label>Age</label>
         <input
           type="number"
           name="age"
-          id="age"
           value={formData.age}
           onChange={handleChange}
           required
         />
-      </label>
-      <br />
-      <label>
-        Affected Area
+      </div>
+      <div>
+        <label>Affected Area</label>
         <input
           type="text"
           name="location"
-          id="location"
           value={formData.location}
           onChange={handleChange}
           required
         />
-      </label>
-      <br />
-      <label>
-        Upload Photo
-        <input
-          type="file"
-          name="photo"
-          id="photo"
-          onChange={handleFileChange}
-          required
-        />
-      </label>
-      <br />
+      </div>
+      <div>
+        <label>Upload Photo</label>
+        <input type="file" onChange={handleFileChange} required />
+      </div>
       <button type="submit">Submit</button>
     </form>
   );
