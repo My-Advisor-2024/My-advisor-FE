@@ -39,7 +39,7 @@ const DiagnosisForm = () => {
 
   return (
     <form id="diagnosisForm" onSubmit={handleSubmit}>
-      <h1>Diagnosis Form</h1>
+      <h1>My-advisor</h1>
 
       <div>
         <label>Gender</label>
