@@ -40,16 +40,23 @@ const DiagnosisForm = () => {
   return (
     <form id="diagnosisForm" onSubmit={handleSubmit}>
       <h1>Diagnosis Form</h1>
+
       <div>
         <label>Gender</label>
-        <input
-          type="text"
+        <select
           name="gender"
           value={formData.gender}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="" disabled>
+            Select Gender
+          </option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+        </select>
       </div>
+
       <div>
         <label>Age</label>
         <input
@@ -60,6 +67,7 @@ const DiagnosisForm = () => {
           required
         />
       </div>
+
       <div>
         <label>Affected Area</label>
         <input
@@ -70,6 +78,7 @@ const DiagnosisForm = () => {
           required
         />
       </div>
+      
       <div>
         <label>Upload Photo</label>
         <input type="file" onChange={handleFileChange} required />
