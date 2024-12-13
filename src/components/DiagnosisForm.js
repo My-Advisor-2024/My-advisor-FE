@@ -70,15 +70,26 @@ const DiagnosisForm = () => {
 
       <div>
         <label>Affected Area</label>
-        <input
-          type="text"
+        <select
           name="location"
           value={formData.location}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="" disabled>
+            Select Affected Area
+          </option>
+          <option value="upper extremity">Upper Extremity</option>
+          <option value="posterior torso">Posterior Torso</option>
+          <option value="lower extremity">Lower Extremity</option>
+          <option value="trunk">Trunk</option>
+          <option value="lateral torso">Lateral Torso</option>
+          <option value="head/neck">Head/Neck</option>
+          <option value="palms/soles">Palms/Soles</option>
+          <option value="oral/genital">Oral/Genital</option>
+        </select>
       </div>
-      
+
       <div>
         <label>Upload Photo</label>
         <input type="file" onChange={handleFileChange} required />
