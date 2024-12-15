@@ -1,9 +1,8 @@
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import DiagnosisForm from "./components/DiagnosisForm";
-import Result from "./components/Result";
-import Home from "./components/Home";
+import DiagnosisForm from "./pages/DiagnosisForm";
+import Result from "./pages/Result";
+import Home from "./pages/Home";
 
 function App() {
   return (
