@@ -25,17 +25,37 @@ const DiagnosisForm = () => {
     data.append("age", formData.age);
     data.append("location", formData.location);
     data.append("photo", formData.photo);
-
-    // 서버 요청 시뮬레이션 (임시)
-    console.log("Submitting form:", data);
-
-    // 세션 스토리지에 데이터 저장 (백엔드 연결 시 대체 가능)
-    sessionStorage.setItem("uploadedImage", URL.createObjectURL(formData.photo));
-    sessionStorage.setItem("prediction", "AI Predicted Skin Condition");
-
-    // 결과 페이지로 이동
-    window.location.href = "/result";
+  
+    try {
+      // 서버에 데이터 전송
+      const response = await fetch("http://localhost:8000/predict", {
+        method: "POST",
+        body: data,
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+  
+        // 파일을 Base64로 변환하여 세션 스토리지에 저장
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const base64Image = e.target.result; // Base64 인코딩된 이미지 데이터
+          sessionStorage.setItem("uploadedImage", base64Image); // Base64 이미지 저장
+          sessionStorage.setItem("prediction", result.prediction); // 예측 결과 저장
+  
+          // 결과 화면으로 이동
+          window.location.href = "/result";
+        };
+        reader.readAsDataURL(formData.photo); // 파일을 Base64로 변환
+      } else {
+        alert("Failed to submit. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
+  
 
   return (
     <form id="diagnosisForm" onSubmit={handleSubmit}>
