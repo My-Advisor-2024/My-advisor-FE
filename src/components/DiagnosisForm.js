@@ -58,10 +58,9 @@ const DiagnosisForm = () => {
   
 
   return (
-    <form id="diagnosisForm" onSubmit={handleSubmit}>
+    <div className="container">
       <h1>My-advisor</h1>
-
-      <div>
+      <form onSubmit={handleSubmit}>
         <label>Gender</label>
         <select
           name="gender"
@@ -75,20 +74,17 @@ const DiagnosisForm = () => {
           <option value="female">Female</option>
           <option value="male">Male</option>
         </select>
-      </div>
 
-      <div>
         <label>Age</label>
         <input
           type="number"
           name="age"
+          placeholder="Enter your age"
           value={formData.age}
           onChange={handleChange}
           required
         />
-      </div>
 
-      <div>
         <label>Affected Area</label>
         <select
           name="location"
@@ -108,14 +104,13 @@ const DiagnosisForm = () => {
           <option value="palms/soles">Palms/Soles</option>
           <option value="oral/genital">Oral/Genital</option>
         </select>
-      </div>
 
-      <div>
         <label>Upload Photo</label>
         <input type="file" onChange={handleFileChange} required />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
 };
 
