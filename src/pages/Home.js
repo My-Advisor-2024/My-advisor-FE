@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Container from "../components/Container";
+import Button from "../components/Button";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -9,10 +11,10 @@ const Home = () => {
   };
 
   return (
-    <div className="container">
+    <Container>
       <h1>Welcome to My Advisor</h1>
-      <button onClick={handleStart}>Start Diagnosis</button>
-    </div>
+      <Button text="Start Diagnosis" onClick={handleStart} />
+    </Container>
   );
 };
 
